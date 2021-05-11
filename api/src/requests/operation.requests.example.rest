@@ -1,0 +1,16 @@
+@baseUrl = http://localhost:5000/api/ops
+
+###
+GET {{baseUrl}}
+
+--
+
+###
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "concept": "testing",
+  "amount": 20.5,
+  "typeId": 2
+}

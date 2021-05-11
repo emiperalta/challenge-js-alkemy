@@ -1,7 +1,9 @@
 const { Sequelize } = require('sequelize');
 
 const { conOpt } = require('./config/keys');
+
 const OperationModel = require('./model/Operation');
+const TypeModel = require('./model/Type');
 
 const sequelize = new Sequelize(conOpt.database, conOpt.user, conOpt.password, {
   host: conOpt.host,
@@ -10,7 +12,15 @@ const sequelize = new Sequelize(conOpt.database, conOpt.user, conOpt.password, {
 });
 
 const Operation = OperationModel(sequelize);
+const Type = TypeModel(sequelize);
 
-sequelize.sync().then(() => console.log('\nDb connected, sinchronized tables\n'));
+Type.hasMany(Operation, {
+  foreignKey: 'typeId',
+});
+Operation.belongsTo(Type);
 
-module.exports = { Operation };
+sequelize.authenticate().then(() => console.log('\nDb connected'));
+
+sequelize.sync().then(() => console.log('Sinchronized tables\n'));
+
+module.exports = { Operation, Type };

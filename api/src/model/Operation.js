@@ -3,9 +3,9 @@ const { DataTypes } = require('sequelize');
 module.exports = sequelize => {
   return sequelize.define('operation', {
     id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
-      autoIncrement: true,
     },
     concept: {
       type: DataTypes.STRING,
@@ -19,7 +19,7 @@ module.exports = sequelize => {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
     },
-    type_id: {
+    typeId: {
       type: DataTypes.INTEGER,
     },
   });
