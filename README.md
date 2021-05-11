@@ -1,20 +1,12 @@
 # **Challenge JS**
 
-<br/>
-
 ## **Objetivo**
-
-<br/>
 
 Desarrollar una aplicación para administración de presupuesto personal. La misma debe
 permitir crear y editar ingresos y egresos de dinero, y mostrar un balance resultante de las
 operaciones registradas
 
-<br/>
-
 ## **Requerimientos Técnicos**
-
-<br/>
 
 Deberás desarrollar una API en ​**Node.js** junto a cualquiera de los siguientes **frameworks​**, en
 sus versiones estables:
@@ -30,13 +22,9 @@ sus versiones estables:
 En el caso de querer utilizar otro framework es posible, pero debe consultarse con
 anterioridad.
 
-<br/>
-
 Los datos mostrados deben ser persistidos en una base de datos relacional. El esquema de
 datos puede armarse según se considere apropiado en base a los requerimientos del
 negocio. La API deberá exponer URLS que devuelvan datos en JSON.
-
-<br/>
 
 Estos datos en JSON deberán ser consumidos por un cliente, a través de peticiones AJAX. El
 cliente puede ser armado con
@@ -50,24 +38,14 @@ cliente puede ser armado con
 
 El trabajo realizado se subirá a un repositorio.
 
-<br/>
-
 ## **Secciones**
 
-<br/>
-
 ### **Home**
-
-<br/>
 
 La pantalla de inicio deberá mostrar el balance actual, es decir, el resultante de los ingresos y
 egresos de dinero cargados, y un listado de los últimos 10 registrados.
 
-<br/>
-
 ### **ABM de operaciones (ingresos y egresos)**
-
-<br/>
 
 La aplicación deberá contener:
 
@@ -81,11 +59,7 @@ La aplicación deberá contener:
   previamente. No debe ser posible modificar el tipo de operación (ingreso o egreso)
   una vez creada.
 
-<br/>
-
 ## **Bonus**
-
-<br/>
 
 De forma adicional, puede
 
