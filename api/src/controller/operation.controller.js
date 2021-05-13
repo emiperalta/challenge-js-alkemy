@@ -12,7 +12,7 @@ const getAllOps = async (req, res) => {
 const getOp = async (req, res) => {
   const { id } = req.params;
   try {
-    const operation = await Operation.findOne({ where: { id } });
+    const operation = await Operation.findOne({ where: { id }, include: Type });
     res.status(200).json(operation);
   } catch (err) {
     console.error(err);
@@ -24,7 +24,7 @@ const addOp = async (req, res) => {
     const newOp = await Operation.create(req.body);
     res.status(201).json(newOp);
   } catch (err) {
-    console.error(error);
+    console.error(err);
   }
 };
 
