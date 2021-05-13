@@ -1,4 +1,4 @@
-const { Sequelize } = require('sequelize');
+const { Sequelize, DataTypes } = require('sequelize');
 
 const { conOpt } = require('./config/keys');
 
@@ -11,16 +11,13 @@ const sequelize = new Sequelize(conOpt.database, conOpt.user, conOpt.password, {
   dialect: conOpt.dialect,
 });
 
-const Operation = OperationModel(sequelize);
-const Type = TypeModel(sequelize);
+const Operation = OperationModel(sequelize, DataTypes);
+const Type = TypeModel(sequelize, DataTypes);
 
-Type.hasMany(Operation, {
-  foreignKey: 'typeId',
-});
+Type.hasMany(Operation);
 Operation.belongsTo(Type);
 
-sequelize.authenticate().then(() => console.log('\nDb connected'));
-
-sequelize.sync().then(() => console.log('Sinchronized tables\n'));
+sequelize.authenticate().then(() => console.log('\nDb connected\n'));
+sequelize.sync().then(() => console.log('\nSinchronized tables\n'));
 
 module.exports = { Operation, Type };

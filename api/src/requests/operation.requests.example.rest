@@ -3,7 +3,9 @@
 ###
 GET {{baseUrl}}
 
---
+###
+GET {{baseUrl}}/123123123123
+
 
 ###
 POST {{baseUrl}}
@@ -14,3 +16,17 @@ Content-Type: application/json
   "amount": 20.5,
   "typeId": 2
 }
+
+###
+PUT {{baseUrl}}/1
+Content-Type: application/json
+
+{
+  "concept": "testing update",
+  "amount": 10,
+  "typeId": 2
+}
+
+
+###
+DELETE {{baseUrl}}/1
