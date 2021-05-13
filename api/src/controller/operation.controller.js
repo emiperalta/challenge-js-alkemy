@@ -3,7 +3,7 @@ const { Operation, Type } = require('../database');
 const getAllOps = async (req, res) => {
   try {
     const operations = await Operation.findAll({ include: Type });
-    res.status(200).json({ operations });
+    res.status(200).json(operations);
   } catch (err) {
     console.error(err);
   }
