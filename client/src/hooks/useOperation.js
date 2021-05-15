@@ -1,18 +1,28 @@
-import { useState, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 
-import { getAllOps } from 'services/operationService';
+import OperationContext from 'context/OperationContext';
+
+import * as operationService from 'services/operationService';
 
 const useOperation = () => {
-  const [operations, setOperations] = useState([]);
+  const { operations, setOperations } = useContext(OperationContext);
 
   useEffect(() => {
-    getAllOps()
+    operationService
+      .getAllOps()
       .then(ops => setOperations(ops))
       .catch(err => console.error(err));
-  }, []);
+  }, [setOperations]);
+
+  const addNewOp = ({ concept, amount, date, typeId }) => {
+    return operationService.addOp({ concept, amount, date, typeId }).then(res => {
+      setOperations([...operations, res]);
+    });
+  };
 
   return {
     operations,
+    addNewOp,
   };
 };
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Header, Menu } from 'semantic-ui-react';
+import { Header, Icon, Menu } from 'semantic-ui-react';
 
 const Navbar = () => {
   const location = useLocation();
@@ -18,7 +18,9 @@ const Navbar = () => {
         Challenge-JS
       </Header>
       <Menu size='large' attached>
-        <Menu.Item name='home' as={Link} active={activeItem === 'home'} to='/' />
+        <Menu.Item name='home' as={Link} active={activeItem === 'home'} to='/'>
+          <Icon name='home' />
+        </Menu.Item>
         <Menu.Item
           name='operation'
           as={Link}
