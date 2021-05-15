@@ -1,0 +1,19 @@
+.react-datepicker-wrapper,
+.react-datepicker__input-container,
+.react-datepicker__input-container input {
+  display: block;
+  width: 100%;
+}
+
+.title,
+.submit-button {
+  text-align: center;
+}
+
+.title {
+  padding: 1.5rem;
+}
+
+.submit-button {
+  padding-top: 1.2rem;
+}

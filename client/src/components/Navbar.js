@@ -1,13 +1,16 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Header, Menu } from 'semantic-ui-react';
 
 const Navbar = () => {
-  const [activeItem, setActiveItem] = useState('');
+  const location = useLocation();
+  const path = location.pathname === '/' ? 'home' : location.pathname.substring(1);
 
-  const handleClick = (e, { name }) => {
-    setActiveItem(name);
-  };
+  const [activeItem, setActiveItem] = useState(path);
+
+  useEffect(() => {
+    setActiveItem(path);
+  }, [path]);
 
   return (
     <>
@@ -15,27 +18,26 @@ const Navbar = () => {
         Challenge-JS
       </Header>
       <Menu size='large' attached>
+        <Menu.Item name='home' as={Link} active={activeItem === 'home'} to='/' />
         <Menu.Item
-          name='home'
+          name='operation'
           as={Link}
-          active={activeItem === 'home'}
-          onClick={handleClick}
-          to='/'
-        />
-        <Menu.Item
-          name='list'
-          as={Link}
-          active={activeItem === 'list'}
-          onClick={handleClick}
-          to='/list'
+          active={activeItem === 'operation'}
+          to='/operation'
         />
         <Menu.Menu position='right'>
-          <Menu.Item>
-            <Link to='/signup'>Sign Up</Link>
-          </Menu.Item>
-          <Menu.Item>
-            <Link to='/signin'>Sign In</Link>
-          </Menu.Item>
+          <Menu.Item
+            active={activeItem === 'signup'}
+            as={Link}
+            name='sign up'
+            to='/signup'
+          />
+          <Menu.Item
+            active={activeItem === 'signin'}
+            as={Link}
+            name='sign in'
+            to='/signin'
+          />
         </Menu.Menu>
       </Menu>
     </>

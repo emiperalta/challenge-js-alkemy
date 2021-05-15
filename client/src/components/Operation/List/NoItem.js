@@ -8,7 +8,7 @@ const NoItem = () => {
         <Icon name='exclamation circle' />
         No operations yet
       </Header>
-      <Link to='/list' style={{ color: 'white' }}>
+      <Link to='/operation' style={{ color: 'white' }}>
         <Button primary>Add</Button>
       </Link>
     </>
