@@ -12,10 +12,11 @@ const OperationForm = ({ currentId, setCurrentId }) => {
   const [concept, setConcept] = useState('');
   const [amount, setAmount] = useState(0);
   const [date, setDate] = useState(new Date());
-  const [type, setType] = useState(0);
+  const [type, setType] = useState(1);
 
   const { addNewOp, operations, updateOpe } = useOperation();
 
+  //for operation update
   const operation = currentId ? operations.find(op => op.id === currentId) : null;
 
   useEffect(() => {
@@ -40,7 +41,7 @@ const OperationForm = ({ currentId, setCurrentId }) => {
     setConcept('');
     setAmount(0);
     setDate(new Date());
-    setType(0);
+    setType(1);
     setCurrentId('');
   };
 
@@ -48,7 +49,7 @@ const OperationForm = ({ currentId, setCurrentId }) => {
     setConcept('');
     setAmount(0);
     setDate(new Date());
-    setType(0);
+    setType(1);
     setCurrentId('');
   };
 
@@ -93,14 +94,14 @@ const OperationForm = ({ currentId, setCurrentId }) => {
               selected={date}
             />
           </Form.Field>
-          <Form.Field disabled={currentId ? true : false}>
+          <Form.Field>
             <label>Type</label>
             <Dropdown
-              placeholder='Select'
+              disabled={currentId ? true : false}
               fluid
-              selection
               options={options}
               onChange={handleTypeChange}
+              selection
               value={type}
             />
           </Form.Field>

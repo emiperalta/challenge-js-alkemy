@@ -13,8 +13,8 @@ const List = () => {
   return (
     <div>
       <Helmet>
-        <title>List | Challenge-JS</title>
-        <meta name='description' content='CRUD and list of operations' />
+        <title>Operation | Challenge-JS</title>
+        <meta name='description' content='Form and list of operations' />
       </Helmet>
 
       <section className='operation-form'>

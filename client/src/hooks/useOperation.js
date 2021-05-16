@@ -1,12 +1,12 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 
 import OperationContext from 'context/OperationContext';
 
 import * as operationService from 'services/operationService';
 
 const useOperation = () => {
-  const [currentId, setCurrentId] = useState();
-  const { operations, setOperations } = useContext(OperationContext);
+  const { operations, setOperations, currentId, setCurrentId } =
+    useContext(OperationContext);
 
   useEffect(() => {
     operationService
@@ -25,10 +25,9 @@ const useOperation = () => {
   const updateOpe = (id, { concept, amount, date, typeId }) => {
     return operationService
       .updateOp(id, { concept, amount, date, typeId })
-      .then(res => {
-        console.log({ res });
-        setOperations([...operations.map(op => (op.id === id ? res : op))]);
-      })
+      .then(res =>
+        setOperations([...operations.map(op => (op.id === id ? res : op))])
+      )
       .catch(err => console.error(err));
   };
 
