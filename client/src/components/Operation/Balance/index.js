@@ -4,7 +4,6 @@ const OperationBalance = ({ list }) => {
   let balance = 0;
 
   list.forEach(el => {
-    console.log(el);
     el.typeId === 1 && (balance += el.amount);
     el.typeId === 2 && (balance -= el.amount);
   });

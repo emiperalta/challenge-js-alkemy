@@ -1,0 +1,10 @@
+.container,
+.title {
+  padding: 30 0;
+}
+
+.no-item {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
