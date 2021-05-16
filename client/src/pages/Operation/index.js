@@ -8,7 +8,7 @@ import OperationList from 'components/Operation/List';
 import './Operation.css';
 
 const List = () => {
-  const { operations } = useOperation();
+  const { currentId, setCurrentId, operations } = useOperation();
 
   return (
     <div>
@@ -18,10 +18,10 @@ const List = () => {
       </Helmet>
 
       <section className='operation-form'>
-        <OperationForm />
+        <OperationForm currentId={currentId} setCurrentId={setCurrentId} />
       </section>
       <section className='operation-table'>
-        <OperationList operations={operations} />
+        <OperationList operations={operations} setCurrentId={setCurrentId} />
       </section>
     </div>
   );

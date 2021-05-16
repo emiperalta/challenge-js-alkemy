@@ -15,12 +15,9 @@ const App = () => {
         <Navbar />
 
         <Switch>
-          <Route exact path='/'>
-            <Home />
-          </Route>
-          <Route path='/operation'>
-            <Operation />
-          </Route>
+          <Route exact path='/' component={Home} />
+          <Route path='/operation' component={Operation} />
+          <Route path='/operation/edit/:id' component={Operation} />
         </Switch>
       </OperationContextProvider>
     </Router>

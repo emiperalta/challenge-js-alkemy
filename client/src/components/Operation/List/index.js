@@ -6,7 +6,7 @@ import AllOpsList from './AllOpsList';
 
 import './OperationList.css';
 
-const OperationList = ({ operations }) => {
+const OperationList = ({ operations, setCurrentId }) => {
   const location = useLocation();
 
   const path = location.pathname === '/' ? 'home' : location.pathname.substring(1);
@@ -24,7 +24,7 @@ const OperationList = ({ operations }) => {
       {path === 'home' ? (
         <LastTenList listToShow={listToShowInHome} operations={operations} />
       ) : (
-        <AllOpsList listToShow={listToShowInOp} />
+        <AllOpsList listToShow={listToShowInOp} setCurrentId={setCurrentId} />
       )}
     </>
   );
