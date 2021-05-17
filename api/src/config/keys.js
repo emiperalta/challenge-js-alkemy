@@ -13,4 +13,5 @@ module.exports = {
     queueLimit: 0,
   },
   PORT: process.env.PORT,
+  SECRET: process.env.SECRET,
 };
