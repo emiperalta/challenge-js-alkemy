@@ -20,5 +20,8 @@ module.exports = (sequelize, DataTypes) => {
     typeId: {
       type: DataTypes.INTEGER,
     },
+    userId: {
+      type: DataTypes.UUID,
+    },
   });
 };

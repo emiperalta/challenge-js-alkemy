@@ -12,4 +12,5 @@ module.exports = {
     connectionLimit: 10,
     queueLimit: 0,
   },
+  PORT: process.env.PORT,
 };

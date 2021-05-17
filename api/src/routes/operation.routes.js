@@ -1,6 +1,6 @@
 const { Router } = require('express');
 
-const operationController = require('../controller/operation.controller');
+const operationController = require('../controllers/operation.controller');
 
 const router = Router();
 
