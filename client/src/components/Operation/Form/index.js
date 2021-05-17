@@ -57,6 +57,7 @@ const OperationForm = ({ currentId, setCurrentId }) => {
   const handleAmountChange = e => setAmount(e.target.value);
   const handleDateChange = e => setDate(e);
   const handleTypeChange = (e, data) => setType(data.value);
+
   return (
     <Container>
       <div className='title'>
@@ -109,7 +110,7 @@ const OperationForm = ({ currentId, setCurrentId }) => {
         <Form.Field className='submit-button'>
           <Button
             content={currentId ? 'Update' : 'Add'}
-            icon='plus'
+            icon={currentId ? 'edit outline' : 'plus'}
             secondary
             type='submit'
           />

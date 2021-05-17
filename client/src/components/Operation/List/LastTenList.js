@@ -1,6 +1,15 @@
-import { Container, Divider, Grid, Header, Icon, Segment } from 'semantic-ui-react';
+import {
+  Container,
+  Divider,
+  Grid,
+  Header,
+  Icon,
+  List,
+  Segment,
+} from 'semantic-ui-react';
 
 import OperationBalance from 'components/Operation/Balance';
+import OperationItem from './OperationItem';
 import NoItem from './NoItem';
 
 const LastTenList = ({ listToShow, operations }) => {
@@ -16,14 +25,18 @@ const LastTenList = ({ listToShow, operations }) => {
               <OperationBalance list={operations} />
             </Grid.Column>
             <Grid.Column>
-              {listToShow.length ? (
-                <>
-                  <Header as='h3'>Last 10 operations</Header>
-                  {listToShow.splice(0, 10)}
-                </>
-              ) : (
-                <NoItem />
-              )}
+              <List celled>
+                {listToShow.length ? (
+                  <>
+                    <Header as='h3'>Last 10 operations</Header>
+                    {listToShow.slice(0, 10).map(el => (
+                      <OperationItem key={el.id} item={el} />
+                    ))}
+                  </>
+                ) : (
+                  <NoItem />
+                )}
+              </List>
             </Grid.Column>
           </Grid.Row>
         </Grid>

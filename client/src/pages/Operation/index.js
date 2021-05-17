@@ -3,12 +3,12 @@ import Helmet from 'react-helmet';
 import useOperation from 'hooks/useOperation';
 
 import OperationForm from 'components/Operation/Form';
-import OperationList from 'components/Operation/List';
+import OperationList from 'components/Operation/List/AllOpsList';
 
 import './Operation.css';
 
 const List = () => {
-  const { currentId, setCurrentId, operations } = useOperation();
+  const { currentId, setCurrentId, orderedList } = useOperation();
 
   return (
     <div>
@@ -21,7 +21,7 @@ const List = () => {
         <OperationForm currentId={currentId} setCurrentId={setCurrentId} />
       </section>
       <section className='operation-table'>
-        <OperationList operations={operations} setCurrentId={setCurrentId} />
+        <OperationList listToShow={orderedList} setCurrentId={setCurrentId} />
       </section>
     </div>
   );

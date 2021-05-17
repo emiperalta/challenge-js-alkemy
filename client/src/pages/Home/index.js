@@ -2,12 +2,10 @@ import Helmet from 'react-helmet';
 
 import useOperation from 'hooks/useOperation';
 
-import OperationList from 'components/Operation/List';
-
-import './Home.css';
+import LastTenList from 'components/Operation/List/LastTenList';
 
 const Home = () => {
-  const { operations } = useOperation();
+  const { operations, orderedList } = useOperation();
 
   return (
     <div>
@@ -16,7 +14,7 @@ const Home = () => {
         <meta name='description' content='Home page Challenge-JS' />
       </Helmet>
 
-      <OperationList operations={operations} />
+      <LastTenList listToShow={orderedList} operations={operations} />
     </div>
   );
 };
