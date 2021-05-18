@@ -1,8 +1,11 @@
 import { useLocation } from 'react-router-dom';
 import { format } from 'date-fns';
 import { Button, Icon, List, Popup } from 'semantic-ui-react';
+import useUser from 'hooks/useUser';
 
 const OperationItem = ({ handleDelete, handleUpdate, item }) => {
+  const { isLogged, loggedUser } = useUser();
+
   const location = useLocation();
 
   const path = location.pathname === '/' ? 'home' : location.pathname.substring(1);
@@ -21,20 +24,24 @@ const OperationItem = ({ handleDelete, handleUpdate, item }) => {
         </List.Item>
       ) : (
         <List.Item>
-          <List.Content floated='right' verticalAlign='middle'>
-            <Popup
-              header='Edit this operation'
-              position='top center'
-              trigger={<Button icon='edit' onClick={() => handleUpdate(item.id)} />}
-            />
-            <Popup
-              header='Delete this operation'
-              position='top center'
-              trigger={
-                <Button icon='delete' onClick={() => handleDelete(item.id)} />
-              }
-            />
-          </List.Content>
+          {isLogged && loggedUser === item.user.username && (
+            <List.Content floated='right' verticalAlign='middle'>
+              <Popup
+                header='Edit this operation'
+                position='top center'
+                trigger={
+                  <Button icon='edit' onClick={() => handleUpdate(item.id)} />
+                }
+              />
+              <Popup
+                header='Delete this operation'
+                position='top center'
+                trigger={
+                  <Button icon='delete' onClick={() => handleDelete(item.id)} />
+                }
+              />
+            </List.Content>
+          )}
           <Icon name='caret right' />
           <List.Content>
             <List.Header>{item.concept}</List.Header>

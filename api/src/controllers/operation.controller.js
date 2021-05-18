@@ -4,17 +4,10 @@ const getAllOps = async (req, res) => {
   try {
     const operations = await Operation.findAll({
       include: [
-        {
-          model: Type,
-          attributes: ['type'],
-        },
-        {
-          model: User,
-          attributes: ['username', 'email'],
-        },
+        { model: Type, attributes: ['type'] },
+        { model: User, attributes: ['username', 'email'] },
       ],
     });
-    console.log({ operations });
     res.status(200).json(operations);
   } catch (err) {
     console.error(err);
@@ -27,14 +20,8 @@ const getOp = async (req, res) => {
     const operation = await Operation.findOne({
       where: { id },
       include: [
-        {
-          model: Type,
-          attributes: ['type'],
-        },
-        {
-          model: User,
-          attributes: ['username', 'email'],
-        },
+        { model: Type, attributes: ['type'] },
+        { model: User, attributes: ['username', 'email'] },
       ],
     });
     if (!operation) return res.status(404).json({ error: 'Operation not found' });
@@ -45,14 +32,27 @@ const getOp = async (req, res) => {
 };
 
 const addOp = async (req, res) => {
+  const { concept, amount } = req.body;
   const loggedUserId = req.user;
   try {
+    if (!concept || !amount) {
+      return res
+        .status(400)
+        .json({ error: 'Concept and/or amount must not be empty' });
+    }
     const opToSave = {
       ...req.body,
       userId: loggedUserId,
     };
     const newOp = await Operation.create(opToSave);
-    res.status(201).json(newOp);
+    const op = await Operation.findOne({
+      where: { id: newOp.id },
+      include: [
+        { model: Type, attributes: ['type'] },
+        { model: User, attributes: ['username', 'email'] },
+      ],
+    });
+    res.status(201).json(op);
   } catch (err) {
     console.error(err);
   }
@@ -60,9 +60,21 @@ const addOp = async (req, res) => {
 
 const updateOp = async (req, res) => {
   const { id } = req.params;
+  const { concept, amount } = req.body;
   const loggedUserId = req.user;
   try {
-    const opToUpdate = await Operation.findOne({ where: { id } });
+    if (!concept || !amount) {
+      return res
+        .status(400)
+        .json({ error: 'Concept and/or amount must not be empty' });
+    }
+    const opToUpdate = await Operation.findOne({
+      where: { id },
+      include: [
+        { model: Type, attributes: ['type'] },
+        { model: User, attributes: ['username', 'email'] },
+      ],
+    });
     if (!opToUpdate) return res.status(404).json({ error: 'Operation not found ' });
     /*checks if the user who wants to update the operation 
       is the same user who created the operation*/

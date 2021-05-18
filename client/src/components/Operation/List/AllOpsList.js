@@ -1,6 +1,7 @@
 import { Container, Header, List } from 'semantic-ui-react';
 
 import useOperation from 'hooks/useOperation';
+import useUser from 'hooks/useUser';
 
 import OperationItem from './OperationItem';
 import NoItem from './NoItem';
@@ -9,11 +10,9 @@ import './OperationList.css';
 
 const AllOpsList = ({ listToShow, setCurrentId }) => {
   const { deleteOpe } = useOperation();
+  const { token } = useUser();
 
-  const handleDelete = id => {
-    deleteOpe(id);
-  };
-
+  const handleDelete = id => deleteOpe(id, token);
   const handleUpdate = id => setCurrentId(id);
 
   return (

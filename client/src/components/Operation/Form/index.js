@@ -4,6 +4,7 @@ import DatePicker from 'react-datepicker';
 import { parseISO } from 'date-fns';
 
 import useOperation from 'hooks/useOperation';
+import useUser from 'hooks/useUser';
 
 import 'react-datepicker/dist/react-datepicker.css';
 import './OperationForm.css';
@@ -13,8 +14,10 @@ const OperationForm = ({ currentId, setCurrentId }) => {
   const [amount, setAmount] = useState(0);
   const [date, setDate] = useState(new Date());
   const [type, setType] = useState(1);
+  const [message, setMessage] = useState('');
 
   const { addNewOp, operations, updateOpe } = useOperation();
+  const { token, isLogged } = useUser();
 
   //for operation update
   const operation = currentId ? operations.find(op => op.id === currentId) : null;
@@ -36,8 +39,16 @@ const OperationForm = ({ currentId, setCurrentId }) => {
   const handleSubmit = e => {
     e.preventDefault();
     currentId
-      ? updateOpe(currentId, { concept, amount, date, typeId: type })
-      : addNewOp({ concept, amount, date, typeId: type });
+      ? updateOpe(currentId, { concept, amount, date, typeId: type }, token).catch(
+          err => {
+            setMessage(err.message);
+            setTimeout(() => setMessage(''), 4000);
+          }
+        )
+      : addNewOp({ concept, amount, date, typeId: type }, token).catch(err => {
+          setMessage(err.message);
+          setTimeout(() => setMessage(''), 4000);
+        });
     setConcept('');
     setAmount(0);
     setDate(new Date());
@@ -63,7 +74,7 @@ const OperationForm = ({ currentId, setCurrentId }) => {
       <div className='title'>
         <Header as='h2'>{currentId ? 'Edit operation' : 'New operation'}</Header>
       </div>
-      <Form size='large' onSubmit={handleSubmit}>
+      <Form size='big' onSubmit={handleSubmit}>
         <Form.Group widths='equal'>
           <Form.Field>
             <label>Concept</label>
@@ -72,6 +83,7 @@ const OperationForm = ({ currentId, setCurrentId }) => {
               onChange={handleConceptChange}
               placeholder='Concept'
               value={concept}
+              readOnly={isLogged ? false : true}
             />
           </Form.Field>
           <Form.Field>
@@ -85,6 +97,7 @@ const OperationForm = ({ currentId, setCurrentId }) => {
               placeholder='Amount'
               type='number'
               value={amount}
+              readOnly={isLogged ? false : true}
             />
           </Form.Field>
           <Form.Field>
@@ -93,12 +106,13 @@ const OperationForm = ({ currentId, setCurrentId }) => {
               dateFormat='dd/MM/yyyy'
               onChange={handleDateChange}
               selected={date}
+              readOnly={isLogged ? false : true}
             />
           </Form.Field>
           <Form.Field>
             <label>Type</label>
             <Dropdown
-              disabled={currentId ? true : false}
+              disabled={!isLogged || currentId ? true : false}
               fluid
               options={options}
               onChange={handleTypeChange}
@@ -113,7 +127,12 @@ const OperationForm = ({ currentId, setCurrentId }) => {
             icon={currentId ? 'edit outline' : 'plus'}
             secondary
             type='submit'
+            disabled={isLogged ? false : true}
           />
+          {message && <p className='error'>{message}</p>}
+          {!isLogged && (
+            <p className='warning'>You need to sign in to add a new operation!</p>
+          )}
           {currentId && <Button content='Cancel' onClick={handleCancel} />}
         </Form.Field>
       </Form>
