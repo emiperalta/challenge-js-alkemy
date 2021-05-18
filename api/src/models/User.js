@@ -1,24 +1,21 @@
 module.exports = (sequelize, DataTypes) => {
-  return sequelize.define('operation', {
+  return sequelize.define('user', {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
-    concept: {
+    username: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    amount: {
-      type: DataTypes.DOUBLE,
+    email: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
-    date: {
-      type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW,
-    },
-    typeId: {
-      type: DataTypes.INTEGER,
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
   });
 };

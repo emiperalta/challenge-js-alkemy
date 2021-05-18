@@ -4,29 +4,31 @@
 GET {{baseUrl}}
 
 ###
-GET {{baseUrl}}/123123123123
-
+GET {{baseUrl}}/:id
 
 ###
 POST {{baseUrl}}
 Content-Type: application/json
+Authorization: Bearer <token>
 
 {
-  "concept": "testing",
-  "amount": 20.5,
-  "typeId": 2
+  "concept": "test",
+  "amount": 100,
+  "typeId": 1
 }
 
 ###
-PUT {{baseUrl}}/1
+PUT {{baseUrl}}/:id
 Content-Type: application/json
+Authorization: Bearer <token>
 
 {
-  "concept": "testing update",
-  "amount": 10,
-  "typeId": 2
+  "concept": "test update",
+  "amount": 550,
+  "typeId": 1
 }
 
 
 ###
-DELETE {{baseUrl}}/1
+DELETE {{baseUrl}}/:id
+Authorization: Bearer <token>

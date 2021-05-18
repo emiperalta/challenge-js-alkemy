@@ -43,6 +43,9 @@ const useOperation = () => {
     currentId,
     deleteOpe,
     operations,
+    orderedList: operations.sort((a, b) =>
+      a.date > b.date ? -1 : b.date > a.date ? 1 : 0
+    ),
     setCurrentId,
     updateOpe,
   };
