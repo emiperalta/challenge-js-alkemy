@@ -15,6 +15,11 @@ const getAllUsers = async (req, res) => {
 const signIn = async (req, res) => {
   const { email, password } = req.body;
   try {
+    if (!email || !password) {
+      return res
+        .status(400)
+        .json({ error: 'Email and/or password must not be empty' });
+    }
     const user = await User.findOne({ where: { email } });
     if (!user) return res.status(404).json({ error: 'User not found' });
 
@@ -24,7 +29,7 @@ const signIn = async (req, res) => {
 
     if (correctPassword) {
       const token = generateToken(user);
-      return res.status(200).json({ token });
+      return res.status(200).json({ token, user: user.username });
     }
 
     res.status(400).json({ error: 'Invalid credentials' });
@@ -36,6 +41,11 @@ const signIn = async (req, res) => {
 const signUp = async (req, res) => {
   const { username, email, password } = req.body;
   try {
+    if (!username || !email || !password) {
+      return res
+        .status(400)
+        .json({ error: 'Username, email and/or password must not be empty' });
+    }
     const userExists = await User.findOne({ where: { email } });
     if (userExists) {
       return res.status(400).json({ error: 'Email already registered' });
