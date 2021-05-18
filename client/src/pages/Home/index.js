@@ -13,7 +13,6 @@ const Home = () => {
         <title>Home | Challenge-JS</title>
         <meta name='description' content='Home page Challenge-JS' />
       </Helmet>
-
       <LastTenList listToShow={orderedList} operations={operations} />
     </div>
   );

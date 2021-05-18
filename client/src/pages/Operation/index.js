@@ -16,7 +16,6 @@ const List = () => {
         <title>Operation | Challenge-JS</title>
         <meta name='description' content='Form and list of operations' />
       </Helmet>
-
       <section className='operation-form'>
         <OperationForm currentId={currentId} setCurrentId={setCurrentId} />
       </section>

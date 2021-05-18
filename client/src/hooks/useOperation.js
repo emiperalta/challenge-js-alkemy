@@ -15,26 +15,34 @@ const useOperation = () => {
       .catch(err => console.error(err));
   }, [setOperations]);
 
-  const addNewOp = ({ concept, amount, date, typeId }) => {
+  const addNewOp = ({ concept, amount, date, typeId }, token) => {
     return operationService
-      .addOp({ concept, amount, date, typeId })
-      .then(res => setOperations([...operations, res]))
-      .catch(err => console.error(err));
+      .addOp({ concept, amount, date, typeId }, token)
+      .then(res => {
+        if (res.error) throw new Error(res.error);
+        setOperations([...operations, res]);
+      });
   };
 
-  const updateOpe = (id, { concept, amount, date, typeId }) => {
+  const updateOpe = (id, { concept, amount, date, typeId }, token) => {
     return operationService
-      .updateOp(id, { concept, amount, date, typeId })
-      .then(res =>
-        setOperations([...operations.map(op => (op.id === id ? res : op))])
-      )
-      .catch(err => console.error(err));
+      .updateOp(id, { concept, amount, date, typeId }, token)
+      .then(res => {
+        if (res.error) throw new Error(res.error);
+        setOperations([...operations.map(op => (op.id === id ? res : op))]);
+      });
   };
 
-  const deleteOpe = id => {
+  const deleteOpe = (id, token) => {
     return operationService
-      .deleteOp(id)
-      .then(() => setOperations([...operations.filter(op => op.id !== id)]))
+      .deleteOp(id, token)
+      .then(res => {
+        setOperations([...operations.filter(op => op.id !== id)]);
+        if (res) return res.json();
+      })
+      .then(data => {
+        if (data.error) throw new Error(data.error);
+      })
       .catch(err => console.error(err));
   };
 
