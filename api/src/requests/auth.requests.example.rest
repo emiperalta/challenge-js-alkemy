@@ -4,7 +4,7 @@
 GET {{baseUrl}}
 
 ###
-POST {{baseUrl}}/sigin
+POST {{baseUrl}}/signin
 Content-Type: application/json
 
 {
