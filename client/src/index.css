@@ -16,3 +16,21 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+
+.auth-container {
+  margin: 30px;
+}
+
+.auth-form {
+  padding: 15px;
+  outline: 1px #e9e9e9 transparent;
+  box-shadow: 3px 3px 8px 0 #ccc;
+  border-radius: 5px;
+}
+
+@media screen and (min-width: 500px) {
+  .auth-form {
+    width: 470px;
+    margin: 0 auto;
+  }
+}

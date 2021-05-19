@@ -4,8 +4,6 @@ import { useHistory } from 'react-router-dom';
 
 import useUser from 'hooks/useUser';
 
-import './SignInForm.css';
-
 const SignInForm = props => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -36,11 +34,11 @@ const SignInForm = props => {
   };
 
   return (
-    <Container className='login-container'>
+    <Container className='auth-container'>
       <Header as='h2' textAlign='center'>
         Sign in
       </Header>
-      <Form className='login-form' size='big' onSubmit={handleSubmit}>
+      <Form className='auth-form' size='big' onSubmit={handleSubmit}>
         <Form.Input
           fluid
           label='Email'
@@ -59,7 +57,7 @@ const SignInForm = props => {
         <Button type='submit'>Sign in</Button>
       </Form>
       {message && (
-        <Header as='h5' color='red' textAlign='center'>
+        <Header as='h4' color='red' textAlign='center'>
           {message}
         </Header>
       )}

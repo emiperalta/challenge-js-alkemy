@@ -23,6 +23,10 @@ User.hasMany(Operation);
 Operation.belongsTo(User);
 
 sequelize.authenticate().then(() => console.log('\nDb connected\n'));
-sequelize.sync().then(() => console.log('\nSinchronized tables\n'));
+sequelize.sync({ force: true }).then(() => {
+  Type.create({ type: 'Income' });
+  Type.create({ type: 'Expense' });
+  console.log('\nSinchronized tables\n');
+});
 
 module.exports = { Operation, Type, User };
