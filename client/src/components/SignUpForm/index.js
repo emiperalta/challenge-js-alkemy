@@ -8,7 +8,7 @@ const SignUpForm = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState({ error: '', success: '' });
   const history = useHistory();
 
   const { isLogged, userSignUp } = useUser();
@@ -26,19 +26,28 @@ const SignUpForm = () => {
   const handleSubmit = e => {
     e.preventDefault();
     userSignUp({ username, email, password })
-      .then(res => history.push('/signin'))
+      .then(res => {
+        setMessage({
+          error: '',
+          success: `${res.email} successfully registered! Redirecting to sign in page...`,
+        });
+        setTimeout(() => {
+          history.push('/signin');
+          setMessage({ ...message, success: '' });
+        }, 5000);
+      })
       .catch(err => {
-        setMessage(err.message);
-        setTimeout(() => setMessage(''), 5000);
+        setMessage({ ...message, error: err.message });
+        setTimeout(() => setMessage({ ...message, error: '' }), 5000);
       });
   };
 
   return (
-    <Container className='login-container'>
+    <Container className='auth-container'>
       <Header as='h2' textAlign='center'>
         Sign up
       </Header>
-      <Form className='login-form' size='big' onSubmit={handleSubmit}>
+      <Form className='auth-form' size='big' onSubmit={handleSubmit}>
         <Form.Input
           fluid
           label='Username'
@@ -64,9 +73,14 @@ const SignUpForm = () => {
         />
         <Button type='submit'>Sign up</Button>
       </Form>
-      {message && (
-        <Header as='h5' color='red' textAlign='center'>
-          {message}
+      {message.success && (
+        <Header as='h4' color='green' textAlign='center'>
+          {message.success}
+        </Header>
+      )}
+      {message.error && (
+        <Header as='h4' color='red' textAlign='center'>
+          {message.error}
         </Header>
       )}
     </Container>

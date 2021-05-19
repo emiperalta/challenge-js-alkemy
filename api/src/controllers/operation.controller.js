@@ -76,8 +76,6 @@ const updateOp = async (req, res) => {
       ],
     });
     if (!opToUpdate) return res.status(404).json({ error: 'Operation not found ' });
-    /*checks if the user who wants to update the operation 
-      is the same user who created the operation*/
     if (opToUpdate.userId !== loggedUserId) {
       return res.status(403).json({ error: 'Not allowed' });
     }
@@ -94,8 +92,6 @@ const deleteOp = async (req, res) => {
   try {
     const opToDelete = await Operation.findOne({ where: { id } });
     if (!opToDelete) return res.status(404).json({ error: 'Operation not found' });
-    /*checks if the user who wants to delete the operation 
-      is the same user who created the operation*/
     if (opToDelete.userId !== loggedUserId) {
       return res.status(403).json({ error: 'Not allowed' });
     }

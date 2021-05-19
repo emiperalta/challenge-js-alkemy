@@ -16,10 +16,10 @@ const List = () => {
         <title>Operation | Challenge-JS</title>
         <meta name='description' content='Form and list of operations' />
       </Helmet>
-      <section className='operation-form'>
+      <section className='op-form-section'>
         <OperationForm currentId={currentId} setCurrentId={setCurrentId} />
       </section>
-      <section className='operation-table'>
+      <section className='op-table-section'>
         <OperationList listToShow={orderedList} setCurrentId={setCurrentId} />
       </section>
     </div>
